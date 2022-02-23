@@ -1,4 +1,8 @@
 part of 'pokemo_bloc.dart';
 
-@immutable
+
 abstract class PokemonEvent {}
+
+class GetRandomPokemonData extends PokemonEvent{}
+
+class GetPokemonData extends PokemonEvent{}
