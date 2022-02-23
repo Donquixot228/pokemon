@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon/pages/home_page.dart';
 import 'package:pokemon/services/locator.dart';
+import 'package:pokemon/services/navigation_service.dart';
+
+import 'routes/app_router.dart';
 
 void main() {
   setupLocator();
@@ -11,7 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Center(),
+      home:Scaffold(
+        body: Navigator(
+          key: locator<NavigationService>().navigatorKey,
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          initialRoute: HomePage.routeName,
+        ),
+      ),
     );
   }
 }
