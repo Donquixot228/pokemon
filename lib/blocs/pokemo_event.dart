@@ -5,4 +5,7 @@ abstract class PokemonEvent {}
 
 class GetRandomPokemonData extends PokemonEvent{}
 
-class GetPokemonData extends PokemonEvent{}
+class GetPokemonData extends PokemonEvent{
+  String id;
+  GetPokemonData(this.id);
+}

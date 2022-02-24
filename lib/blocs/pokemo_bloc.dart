@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokemon/models/card_model.dart';
@@ -42,6 +40,36 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
           isLoading: false,
         ));
         inspect(state.pokeList);
+      }
+    });
+    on<GetPokemonData>((event, emit) async {
+      emit(state.copyWith(isRequestError: false));
+      List<Pokemon> tempDescList = [];
+      Uri url = Uri.parse('https://pokeapi.co/api/v2/pokemon/${event.id}');
+      Uri secUrl = Uri.parse('https://pokeapi.co/api/v2/pokemon-species/${event.id}');
+      try {
+        emit(state.copyWith(isLoading: true));
+        final response = await http.get(url);
+        final secResponse = await http.get(secUrl);
+        final responseData = json.decode(response.body) as Map<String, dynamic>;
+        final secResponseData =
+            json.decode(secResponse.body) as Map<String, dynamic>;
+        emit(
+          state.copyWith(
+            pokemon: Pokemon.fromJson(responseData, secResponseData),
+            descList: tempDescList,
+            isLoading: false,
+          ),
+        );
+        inspect(state.pokemon);
+      } catch (e) {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            isRequestError: true,
+          ),
+        );
+        throw (e);
       }
     });
   }
