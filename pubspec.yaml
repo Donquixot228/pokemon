@@ -79,7 +79,10 @@ flutter:
   fonts:
     - family: PokeGoTypes
       fonts:
-        - asset: fonts/PokeGOTypes.ttf
+        - asset: assets/fonts/PokeGOTypes.ttf
+    - family: TTNorms-Bold
+      fonts:
+        - asset: assets/fonts/TTNorms-Bold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

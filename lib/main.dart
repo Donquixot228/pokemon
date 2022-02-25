@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon/blocs/pokemo_bloc.dart';
 import 'package:pokemon/pages/home_page.dart';
+import 'package:pokemon/resources/app_colors.dart';
 import 'package:pokemon/services/locator.dart';
 import 'package:pokemon/services/navigation_service.dart';
 
+import 'resources/app_theme.dart';
 import 'routes/app_router.dart';
 
 void main() {
@@ -24,16 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          color: Colors.transparent,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          ),
-          elevation: 0,
-        ),
-      ),
+      theme: theme(),
       home: Scaffold(
+        backgroundColor: AppColors.purpleColor,
         body: Navigator(
           key: locator<NavigationService>().navigatorKey,
           onGenerateRoute: AppRouter.onGenerateRoute,
