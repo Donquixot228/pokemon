@@ -1,5 +1,10 @@
 part of 'pokemo_bloc.dart';
 
+enum PokemonStatus {
+  isLoading,
+  isRequestError,
+}
+
 class PokemonState {
   final bool isLoading;
   final bool isRequestError;

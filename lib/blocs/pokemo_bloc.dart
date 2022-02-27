@@ -42,6 +42,8 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
         inspect(state.pokeList);
       }
     });
+
+
     on<GetPokemonData>((event, emit) async {
       emit(state.copyWith(isRequestError: false));
       List<Pokemon> tempDescList = [];
