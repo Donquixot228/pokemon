@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pokemon/pages/detail_screen.dart';
 import 'package:pokemon/pages/home_page.dart';
 import 'package:pokemon/pages/random_pokemon_page.dart';
 import 'package:pokemon/pages/search_page.dart';
@@ -17,7 +18,8 @@ class AppRouter {
         return _FadeRoute(child:SearchPage.create(), time: 0);
       case RandomPokemonPage.routeName:
         return _FadeRoute(child:RandomPokemonPage.create(), time: 0);
-
+      case PokeDetailScreen.routeName:
+        return _FadeRoute(child:PokeDetailScreen.create(), time: 0);
       default:
         return _errorRoute();
     }

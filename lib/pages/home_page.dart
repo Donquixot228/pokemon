@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon/blocs/pokemo_bloc.dart';
 import 'package:pokemon/pages/random_pokemon_page.dart';
 import 'package:pokemon/pages/search_page.dart';
-import 'package:pokemon/resources/app_colors.dart';
 import 'package:pokemon/services/locator.dart';
 import 'package:pokemon/services/navigation_service.dart';
 
@@ -52,11 +53,13 @@ class HomeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<PokemonBloc, PokemonState>(
+  builder: (context, state) {
     return GestureDetector(
       onTap: () {
         numbOfButton == 1
             ? locator<NavigationService>()
-                .navigateTo(RandomPokemonPage.routeName)
+                .navigateTo(RandomPokemonPage.routeName).then((value) => context.read<PokemonBloc>().add(GetRandomPokemonData()))
             : locator<NavigationService>().navigateTo(SearchPage.routeName);
       },
       child: Container(
@@ -82,5 +85,7 @@ class HomeButton extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }

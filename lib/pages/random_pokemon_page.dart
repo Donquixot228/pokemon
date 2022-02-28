@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon/blocs/pokemo_bloc.dart';
 import 'package:pokemon/resources/app_colors.dart';
+import 'package:pokemon/widgets/pokemon_card.dart';
 import 'package:pokemon/widgets/request_error.dart';
+import 'package:pokemon/widgets/search_field.dart';
 
 class RandomPokemonPage extends StatelessWidget {
   const RandomPokemonPage();
@@ -28,7 +30,7 @@ class RandomPokemonPage extends StatelessWidget {
             ),
             Expanded(
               child: state.isLoading
-                  ? Center(child: Image.asset('images/pokeLoad.gif'))
+                  ? Center(child: Image.asset('assets/images/pokeLoad.gif'))
                   : RefreshIndicator(
                       onRefresh: () async {
                         context.read<PokemonBloc>().add(GetRandomPokemonData());
@@ -37,9 +39,9 @@ class RandomPokemonPage extends StatelessWidget {
                         padding: EdgeInsets.only(top: 20),
                         children: [
                           Column(
-                            children: pokeData
+                            children: state.pokeList
                                 .map((item) => PokeCard(item, context))
-                                .toList(),
+                                .toList() as List<Widget>,
                           ),
                         ],
                       ),
